@@ -14,10 +14,14 @@
     <script>
         const output = document.getElementById("output");
         output.innerHTML = "Wait for connection...";
-        // const ws = new WebSocket("ws://localhost:3000");
-        const ws = new WebSocket("wss://mouse-click-js.herokuapp.com");
+       // const ws = new WebSocket("ws://localhost:3000");
+       // const ws = new WebSocket("wss://localhost:3000");
+     //   const ws = new WebSocket("wss://mouse-click-js.herokuapp.com");
+        const ws = new WebSocket("wss://testappserver2314.herokuapp.com");
+       
         ws.onopen =
             () => {
+                ws.send(JSON.stringify({name: "name"}));
                 output.innerHTML = "Connected to the server";
                 window.onclick = (event) => {
                     const x = event.clientX;
@@ -29,7 +33,12 @@
                 ws.onmessage = (event) => {
                     console.log(event.data);
                     const msg = JSON.parse(event.data);
-                    output.innerHTML = `Answer from server: x = ${msg.x}, y = ${msg.y}`;
+                    if (msg.z == 0) {
+                      output.innerHTML += `User Connected<br>`;  
+                    }
+                    else {
+                    output.innerHTML += `Answer from server: x = ${msg.x}, y = ${msg.y}<br>`;
+                    }
                 }
             };
     </script>
