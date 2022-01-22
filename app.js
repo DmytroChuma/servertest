@@ -16,7 +16,10 @@ wss.on("connection",
         //CLIENTS[id] = ws;
         CLIENTS.push(ws);
     
+        sendAll("<br>Client connected " );
+    
         console.log("Client connected");
+    
         ws.onmessage =
             (event) =>
             {
