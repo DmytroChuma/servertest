@@ -20,7 +20,7 @@ wss.on("connection",
                 console.log(msg.x + ", " + msg.y);
                 // Send an answer
                 const resp = {
-                    x: msg.x,
+                    x: msg.x + " й" ,
                     y: msg.y
                 }
                 ws.send(JSON.stringify(resp));
