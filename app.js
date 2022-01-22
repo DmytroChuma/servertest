@@ -15,8 +15,12 @@ wss.on("connection",
     {
         //CLIENTS[id] = ws;
         CLIENTS.push(ws);
-    
-        sendAll("<br>Client connected " );
+        const resps = {
+                    x: 0 ,
+                    y: 0,
+                    z: 0
+                }
+        sendAll(JSON.stringify(resps) );
     
         console.log("Client connected");
     
@@ -28,7 +32,8 @@ wss.on("connection",
                 // Send an answer
                 const resp = {
                     x: msg.x + " й" ,
-                    y: msg.y
+                    y: msg.y,
+                    z: 1
                 }
                 sendAll(JSON.stringify(resp));
                 //ws.send(JSON.stringify(resp));
