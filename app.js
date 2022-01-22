@@ -28,6 +28,9 @@ wss.on("connection",
             (event) =>
             {
                 const msg = JSON.parse(event.data);
+            if (msg.q == 1){
+                
+            
                 console.log(msg.x + ", " + msg.y);
                 // Send an answer
                 const resp = {
@@ -37,6 +40,7 @@ wss.on("connection",
                 }
                 sendAll(JSON.stringify(resp));
                 //ws.send(JSON.stringify(resp));
+                }
             }
     });
 
