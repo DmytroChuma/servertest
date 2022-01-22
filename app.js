@@ -12,6 +12,9 @@ const wss = new ws.Server({ server: httpServer });
 wss.on("connection",
     (ws) =>
     {
+        //CLIENTS[id] = ws;
+        CLIENTS.push(ws);
+    
         console.log("Client connected");
         ws.onmessage =
             (event) =>
@@ -23,9 +26,17 @@ wss.on("connection",
                     x: msg.x + " й" ,
                     y: msg.y
                 }
-                ws.send(JSON.stringify(resp));
+                sendAll(JSON.stringify(resp));
+                //ws.send(JSON.stringify(resp));
             }
     });
+
+ function sendAll(message) {
+        for (var i=0; i < CLIENTS.length; i++) {
+         
+            CLIENTS[i].send(message); 
+        }
+    }
 
 const port = process.env.PORT || 3000;
 httpServer.listen(port, () => { console.log("Server started. Port: ", port); });
